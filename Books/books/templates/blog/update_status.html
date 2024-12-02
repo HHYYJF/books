@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>update_status</title>
+</head>
+<body>
+    <h1>Изменить статус книги</h1>
+    <form method="post">
+        {% csrf_token %}
+        <select name="status">
+            {% for value, display in book.STATUS_CHOICES %}
+                <option value="{{ value }}" {% if book.status == value %}selected{% endif %}>{{ display }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Сохранить</button>
+    </form>
+    <a href="{% url 'book_list' %}">Назад</a>
+</body>
+</html>

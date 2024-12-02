@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>book_list</title>
+</head>
+<body>
+    <h1>Список книг</h1>
+    <a href="{% url 'add_book' %}">Добавить книгу</a>
+    <form method="get" action="{% url 'search_books' %}">
+        <input type="text" name="q" placeholder="Поиск по названию, автору, году">
+        <button type="submit">Найти</button>
+    </form>
+    <ul>
+        {% for book in books %}
+            <li>
+                {{ book.title }} ({{ book.author }}, {{ book.year }}) - {{ book.get_status_display }}
+                <a href="{% url 'delete_book' book.id %}">Удалить</a>
+                <a href="{% url 'update_status' book.id %}">Изменить статус</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
